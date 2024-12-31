@@ -18,18 +18,22 @@
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
+
+    mat-card {
+      background: rgba(255, 255, 255, 0.8) !important; /* Sobrescreve o fundo padrão */
+    }
     .btn-login, .btn-register {
       margin: 10px;
       padding: 10px 20px;
       font-size: 18px;
-      background-color: #413b7d;
-      color: #f7f5f5;
+      background-color:#f1f2f6;
+      color: #4d90ff;
       border: none;
       border-radius: 5px;
       cursor: pointer;
       transition: background-color 0.3s ease;
       &:hover {
-        background-color: #45a049;
+        background-color: black;
       }
     }
   }

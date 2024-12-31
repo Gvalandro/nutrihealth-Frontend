@@ -1,8 +1,10 @@
 // landing.component.ts
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { RouterLink, Router } from '@angular/router'; // Importamos o Router do @angular/router
+import { ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router'; // Importamos o Router do @angular/router
+import { MatCardModule } from '@angular/material/card';
+
 
 @Component({
   selector: 'app-landing',
@@ -12,14 +14,10 @@ import { RouterLink, Router } from '@angular/router'; // Importamos o Router do 
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterLink
+    MatCardModule
   ],
 })
 export class LandingComponent {
-  formType: 'login' | 'register' | null = null;
-  landForm!: FormGroup;
-  submitted = false;
-
   // Note que agora estamos usando o Router do Angular
   constructor(private router: Router) {}
 

@@ -40,26 +40,42 @@ export class AuthService {
 
   login(userLoginDTO: UserLoginDTO): Observable<string> {
     return this.http.post<string>(`${this.API_URL}/login`, userLoginDTO).pipe(
-      tap(token => {
-        localStorage.setItem(this.tokenKey, token);
-        this.isAuthenticatedSubject.next(true);
+      tap((token) => {
+        try {
+          localStorage.setItem(this.tokenKey, token);
+          this.isAuthenticatedSubject.next(true);
+        } catch (error) {
+          console.error('Erro ao acessar o localStorage:', error);
+        }
       })
     );
   }
 
   logout(): void {
-    localStorage.removeItem(this.tokenKey);
-    this.isAuthenticatedSubject.next(false);
-    this.router.navigate(['/login']);
+    try {
+      localStorage.removeItem(this.tokenKey);
+      this.isAuthenticatedSubject.next(false);
+      this.router.navigate(['/login']);
+    } catch (error) {
+      console.error('Erro ao remover item do localStorage:', error);
+    }
   }
 
+
   getToken(): string | null {
+    if (typeof localStorage === 'undefined') {
+      return null;
+    }
     return localStorage.getItem(this.tokenKey);
   }
 
   private hasToken(): boolean {
+    if (typeof localStorage === 'undefined') {
+      return false;
+    }
     return !!this.getToken();
   }
+
 
   isAuthenticated(): boolean {
     return this.isAuthenticatedSubject.value;
